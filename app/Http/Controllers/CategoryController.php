@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryStore;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -24,24 +25,25 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CategoryStore $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryStore $request)
     {
-        //
+        Category::create($request->validated());
+        return back()->with('status', 'Categoría creada con éxito!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)

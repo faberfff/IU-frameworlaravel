@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 Route::view('acerca-de', 'about')->name('about');
-
-Route::get('blog', 'BlogController@index')->name('blog.index');
-Route::get('blog/{post:slug}', 'BlogController@show')->name('blog.show');
-
 Route::view('contactos', 'contact')->name('contact');
+
+Route::prefix('dashboard')->group(function () {
+    Route::resource('post', PostController::class);
+    Route::resource('category', CategoryController::class);
+});
 

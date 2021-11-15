@@ -8,6 +8,14 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- AGREGAR MARGENES A LA PÁGINA -->
+    @include('dashboard.partials.navbar')
+    <div class="container">
+        <div class="jumbotron">
+            @include('dashboard.partials.status')
+            @yield('content') <!-- Nos permite practicar la herencia y el polimorfismo -->
+        </div>
+    </div>
     <script src="{{ asset('js/app.js')}}"></script>
 </body>
 </html>

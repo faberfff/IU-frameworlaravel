@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStore;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.post.index');
     }
 
     /**
@@ -24,18 +25,21 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.post.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PostStore $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostStore $request)
     {
-        //
+        // Llama al modelo y se le indica que debe crear un nuevo recurso
+        // validated llama a rules e indica que debe tener el array, validando campos requeridos maximo y minimo
+        Post::create($request->validated());
+        return back()->with('status', 'Publicación creada con éxito!'); // Si el status es 200 muestra este mensaje
     }
 
     /**
@@ -46,7 +50,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('dashboard.post.show');
     }
 
     /**
@@ -57,7 +61,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('dashboard.post.edit');
     }
 
     /**
